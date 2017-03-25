@@ -14,9 +14,9 @@ import tea_manager.com.example.honza.tea_manager.R;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class TeaPickerActivityFragment extends Fragment {
+public class TeaPickerFragment extends Fragment {
 
-    public TeaPickerActivityFragment() {
+    public TeaPickerFragment() {
     }
 
     @Override

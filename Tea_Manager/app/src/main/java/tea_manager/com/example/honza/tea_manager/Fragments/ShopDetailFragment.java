@@ -1,7 +1,8 @@
 package tea_manager.com.example.honza.tea_manager.Fragments;
 
-import android.support.v4.app.Fragment;
+
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,16 +10,21 @@ import android.view.ViewGroup;
 import tea_manager.com.example.honza.tea_manager.R;
 
 /**
- * A placeholder fragment containing a simple view.
+ * A simple {@link Fragment} subclass.
  */
-public class MainActivityFragment extends Fragment {
+public class ShopDetailFragment extends Fragment {
 
-    public MainActivityFragment() {
+
+    public ShopDetailFragment() {
+        // Required empty public constructor
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_main, container, false);
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_shop_detail, container, false);
     }
+
 }

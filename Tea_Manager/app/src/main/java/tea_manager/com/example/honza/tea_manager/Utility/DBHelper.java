@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import tea_manager.com.example.honza.tea_manager.Objects.Shop;
 import tea_manager.com.example.honza.tea_manager.Objects.Tea;
 
 /**
@@ -24,20 +25,27 @@ public class DBHelper extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        //All necessary tables you like to create will create here
-        String CREATE_TABLE_GAME = "CREATE TABLE " + Tea.TABLE + '('
+        String CREATE_TABLE_TEAS = "CREATE TABLE " + Tea.TABLE + '('
                 + Tea.KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
                 + Tea.KEY_NAME + " TEXT, "
                 + Tea.KEY_TYPE + " INTEGER, "
                 + Tea.KEY_INFUSIONS + " INTEGER )";
-        db.execSQL(CREATE_TABLE_GAME);
+        db.execSQL(CREATE_TABLE_TEAS);
+
+        String CREATE_TABLE_SHOPS = "CREATE TABLE " + Shop.TABLE + '('
+                + Shop.KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
+                + Shop.KEY_NAME + " TEXT, "
+                + Shop.KEY_OPEN_FROM_HOUR + " INTEGER, "
+                + Shop.KEY_OPEN_FROM_MINUTE + " INTEGER, "
+                + Shop.KEY_OPEN_TO_HOUR + " INTEGER, "
+                + Shop.KEY_OPEN_TO_MINUTE + " INTEGER )";
+        db.execSQL(CREATE_TABLE_SHOPS);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Drop older table if existed, all data will be gone!!!
         db.execSQL("DROP TABLE IF EXISTS " + Tea.TABLE);
-        // Create tables again
+        db.execSQL("DROP TABLE IF EXISTS " + Shop.TABLE);
         onCreate(db);
     }
 }

@@ -1,13 +1,10 @@
 package tea_manager.com.example.honza.tea_manager.Activities;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 
-import tea_manager.com.example.honza.tea_manager.Fragments.ChooseTeaActivityFragment;
+import tea_manager.com.example.honza.tea_manager.Fragments.ChooseTeaFragment;
 import tea_manager.com.example.honza.tea_manager.R;
 
 public class ChooseTeaActivity extends AppCompatActivity {
@@ -21,7 +18,7 @@ public class ChooseTeaActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        ChooseTeaActivityFragment mainFragment = new ChooseTeaActivityFragment();
+        ChooseTeaFragment mainFragment = new ChooseTeaFragment();
         getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.mainFragment, mainFragment)

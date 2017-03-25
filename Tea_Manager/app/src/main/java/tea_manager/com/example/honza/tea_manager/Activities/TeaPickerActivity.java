@@ -1,13 +1,10 @@
 package tea_manager.com.example.honza.tea_manager.Activities;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 
-import tea_manager.com.example.honza.tea_manager.Fragments.TeaPickerActivityFragment;
+import tea_manager.com.example.honza.tea_manager.Fragments.TeaPickerFragment;
 import tea_manager.com.example.honza.tea_manager.R;
 
 public class TeaPickerActivity extends AppCompatActivity {
@@ -21,7 +18,7 @@ public class TeaPickerActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        TeaPickerActivityFragment mainFragment = new TeaPickerActivityFragment();
+        TeaPickerFragment mainFragment = new TeaPickerFragment();
         getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.mainFragment, mainFragment)

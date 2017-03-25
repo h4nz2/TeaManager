@@ -56,6 +56,7 @@
                 android:value="tea_manager.com.example.honza.tea_manager.Activities.MainActivity" />
         </activity>
         <activity android:name=".Activities.TeaDetailActivity" />
+        <activity android:name=".Activities.ShopDetailActivity"></activity>
     </application>
 
 </manifest>

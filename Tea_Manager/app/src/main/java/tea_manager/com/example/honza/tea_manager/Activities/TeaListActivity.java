@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import tea_manager.com.example.honza.tea_manager.Fragments.TeaListActivityFragment;
+import tea_manager.com.example.honza.tea_manager.Fragments.TeaListFragment;
 import tea_manager.com.example.honza.tea_manager.R;
 
 public class TeaListActivity extends AppCompatActivity {
@@ -30,7 +30,7 @@ public class TeaListActivity extends AppCompatActivity {
             }
         });
 
-        TeaListActivityFragment mainFragment = new TeaListActivityFragment();
+        TeaListFragment mainFragment = new TeaListFragment();
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.mainFragment, mainFragment)

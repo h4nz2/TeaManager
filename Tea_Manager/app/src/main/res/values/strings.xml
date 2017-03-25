@@ -21,11 +21,19 @@
     <string name="thanksButton">Thanks!</string>
     <string name="title_activity_shop_list">My shops</string>
 
-    <string name="teaName">Name</string>
+    <string name="teaName">Tea name</string>
     <string name="teaType">Type</string>
     <string name="teaInfusions">Infusions</string>
     <string name="teaDetailAdd">Add new tea</string>
     <string name="teaDetailEdit">Edit tea</string>
     <string name="saveChanges">Save changes</string>
     <string name="submit">Add</string>
+
+    <string name="shopName">Shop name</string>
+    <string name="opensAt">Opens at</string>
+    <string name="closesAt">Closes at</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

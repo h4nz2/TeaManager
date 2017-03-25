@@ -6,6 +6,24 @@ package tea_manager.com.example.honza.tea_manager.Objects;
  */
 
 public class Shop {
+    // Labels table name
+    public static final String TABLE = "shops";
+    // Labels Table Columns names
+    public static final String KEY_ID = "id";
+    public static final String KEY_NAME = "name";
+    public static final String KEY_OPEN_FROM_HOUR = "openFromHour";
+    public static final String KEY_OPEN_FROM_MINUTE = "openFromMinute";
+    public static final String KEY_OPEN_TO_HOUR = "openToHour";
+    public static final String KEY_OPEN_TO_MINUTE = "openToMinute";
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
     private int ID;
     private String name;
     private OpeningHours openingHours;
@@ -17,8 +35,14 @@ public class Shop {
         this.openingHours = openingHours;
     }
 
-    //this class stores opening and closing time; hours and minutes
-    public class OpeningHours{
+
+
+
+
+    /**
+     * This class stores opening and closing time; hours and minutes.
+     */
+    public static class OpeningHours{
         private int fromHour;
         private int fromMinute;
         private int toHour;
@@ -31,6 +55,19 @@ public class Shop {
             this.fromMinute = fromMinute;
             this.toHour = toHour;
             this.toMinute = toMinute;
+        }
+
+        /**
+         * Returns string in format hh:mm - hh:mm.
+         * */
+        @Override
+        public String toString(){
+            return new String(
+                    Integer.toString(getFromHour()) + ":" +
+                    Integer.toString(getFromMinute()) + " - " +
+                    Integer.toString(getToHour()) + ":" +
+                    Integer.toString(getToMinute())
+            );
         }
 
         public int getFromHour() {

@@ -20,12 +20,12 @@ import tea_manager.com.example.honza.tea_manager.Utility.TeaListAdapter;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class TeaListActivityFragment extends Fragment {
+public class TeaListFragment extends Fragment {
     private TeaListAdapter mAdapter;
     private List<Tea> mTeaList;
     RecyclerView mRecyclerView;
 
-    public TeaListActivityFragment() {
+    public TeaListFragment() {
     }
 
     @Override
