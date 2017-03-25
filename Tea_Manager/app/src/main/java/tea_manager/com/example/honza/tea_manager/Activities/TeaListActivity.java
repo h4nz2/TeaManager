@@ -33,7 +33,7 @@ public class TeaListActivity extends AppCompatActivity {
         TeaListActivityFragment mainFragment = new TeaListActivityFragment();
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.mainFragment, mainFragment)
+                .replace(R.id.mainFragment, mainFragment)
                 .commit();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

@@ -6,11 +6,15 @@
     android:layout_height="match_parent"
     tools:context="tea_manager.com.example.honza.tea_manager.Activities.TeaDetailActivity">
 
-    <FrameLayout
-        android:id="@+id/mainFragment"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="8dp">
-    </FrameLayout>
+        android:layout_height="match_parent">
+        <FrameLayout
+            android:id="@+id/mainFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+        </FrameLayout>
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>

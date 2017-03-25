@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="tea_manager.com.example.honza.tea_manager.Fragments.TeaListActivityFragment"
-    tools:showIn="@layout/activity_tea_list">
+    tools:showIn="@layout/activity_tea_list"
+    >
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/teaList"

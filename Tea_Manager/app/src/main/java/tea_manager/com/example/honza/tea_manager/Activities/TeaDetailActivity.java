@@ -38,7 +38,7 @@ public class TeaDetailActivity extends AppCompatActivity implements TeaDetailFra
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.mainFragment, mainFragment)
+                .replace(R.id.mainFragment, mainFragment)
                 .commit();
     }
 
