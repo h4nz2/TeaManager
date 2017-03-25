@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Tea Manager</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="myTeas">My teas</string>
+    <string name="pickMeTea">Pick me a tea</string>
+    <string name="myShops">My shops</string>
+
+    <string name="title_activity_choose_tea">Choose Tea</string>
+
+    <string name="greenTea">Green tea</string>
+    <string name="blackTea">Black tea</string>
+    <string name="other">Other</string>
+    <string name="any">Any</string>
+    <string name="title_activity_tea_list">TeaListActivity</string>
+
+    <string name="teaListTitle">My Teas</string>
+    <string name="title_activity_tea_picker">Chosen Tea</string>
+
+    <string name="chooseAnotherTea">Choose another</string>
+    <string name="thanksButton">Thanks!</string>
+    <string name="title_activity_shop_list">My shops</string>
+
+    <string name="teaName">Name</string>
+    <string name="teaType">Type</string>
+    <string name="teaInfusions">Infusions</string>
+    <string name="teaDetailAdd">Add new tea</string>
+    <string name="teaDetailEdit">Edit tea</string>
+    <string name="saveChanges">Save changes</string>
+    <string name="submit">Submit</string>
+</resources>
