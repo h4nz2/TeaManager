@@ -15,13 +15,12 @@ import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 
 import tea_manager.com.example.honza.tea_manager.Activities.MainActivity;
+import tea_manager.com.example.honza.tea_manager.Activities.ShopDetailActivity;
 import tea_manager.com.example.honza.tea_manager.Activities.TeaDetailActivity;
 import tea_manager.com.example.honza.tea_manager.Objects.Tea;
 import tea_manager.com.example.honza.tea_manager.R;
 import tea_manager.com.example.honza.tea_manager.Utility.DBteaCRUD;
 
-import static tea_manager.com.example.honza.tea_manager.Activities.TeaDetailActivity.ADD_MODE;
-import static tea_manager.com.example.honza.tea_manager.Activities.TeaDetailActivity.TEA_TO_VIEW;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,10 +33,10 @@ public class TeaDetailFragment extends Fragment {
     private FragmentListener mFragmentListener;
     private Tea mTea;
 
-    Button submitButton;
-    EditText nameEdit;
-    Spinner typeSpinner;
-    NumberPicker infusionsPicker;
+    private Button submitButton;
+    private EditText nameEdit;
+    private Spinner typeSpinner;
+    private NumberPicker infusionsPicker;
 
 
     public TeaDetailFragment() {
@@ -95,7 +94,7 @@ public class TeaDetailFragment extends Fragment {
         mMode = args.getInt(TeaDetailActivity.MODE);
         if(mMode == TeaDetailActivity.EDIT_MODE){
             submitButton.setText(R.string.saveChanges);
-            mTea = (Tea) args.getSerializable(TEA_TO_VIEW);
+            mTea = (Tea) args.getSerializable(TeaDetailActivity.TEA_TO_VIEW);
             fillTeaInfo(mTea);
         }
         else {
@@ -111,7 +110,7 @@ public class TeaDetailFragment extends Fragment {
                 mTea.setInfusions(infusionsPicker.getValue());
                 DBteaCRUD dBteaCRUD = new DBteaCRUD(getContext());
 
-                if(mMode == ADD_MODE) {
+                if(mMode == TeaDetailActivity.ADD_MODE) {
                     dBteaCRUD.addTea(mTea);
                 }else {
                     dBteaCRUD.updateTea(mTea);

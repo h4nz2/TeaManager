@@ -53,10 +53,10 @@ public class DBshopCRUD {
                         cursor.getInt(cursor.getColumnIndex(Shop.KEY_ID)),
                         cursor.getString(cursor.getColumnIndex(Shop.KEY_NAME)),
                         new Shop.OpeningHours(
-                                cursor.getColumnIndex(Shop.KEY_OPEN_FROM_HOUR),
-                                cursor.getColumnIndex(Shop.KEY_OPEN_FROM_MINUTE),
-                                cursor.getColumnIndex(Shop.KEY_OPEN_TO_HOUR),
-                                cursor.getColumnIndex(Shop.KEY_OPEN_TO_MINUTE)
+                                cursor.getInt(cursor.getColumnIndex(Shop.KEY_OPEN_FROM_HOUR)),
+                                cursor.getInt(cursor.getColumnIndex(Shop.KEY_OPEN_FROM_MINUTE)),
+                                cursor.getInt(cursor.getColumnIndex(Shop.KEY_OPEN_TO_HOUR)),
+                                cursor.getInt(cursor.getColumnIndex(Shop.KEY_OPEN_TO_MINUTE))
                         )
                 );
                 shopList.add(shop);

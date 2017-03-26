@@ -1,11 +1,13 @@
 package tea_manager.com.example.honza.tea_manager.Objects;
 
 
+import java.io.Serializable;
+
 /**
  * Created by Honza on 23/03/2017.
  */
 
-public class Shop {
+public class Shop implements Serializable {
     // Labels table name
     public static final String TABLE = "shops";
     // Labels Table Columns names
@@ -42,7 +44,7 @@ public class Shop {
     /**
      * This class stores opening and closing time; hours and minutes.
      */
-    public static class OpeningHours{
+    public static class OpeningHours implements Serializable{
         private int fromHour;
         private int fromMinute;
         private int toHour;
@@ -63,10 +65,30 @@ public class Shop {
         @Override
         public String toString(){
             return new String(
-                    Integer.toString(getFromHour()) + ":" +
-                    Integer.toString(getFromMinute()) + " - " +
-                    Integer.toString(getToHour()) + ":" +
-                    Integer.toString(getToMinute())
+                    String.format("%02d", fromHour) + ":" +
+                    String.format("%02d", fromMinute) + " - " +
+                    String.format("%02d", toHour) + ":" +
+                    String.format("%02d", toMinute)
+            );
+        }
+
+        /**
+         * Returns opening time in format hh:mm
+         * */
+        public String openFromToString(){
+            return new String(
+                    String.format("%02d", fromHour) + ":" +
+                    String.format("%02d", fromMinute)
+            );
+        }
+
+        /**
+         * Returns closing time in format hh:mm
+         * */
+        public String openToToString(){
+            return new String(
+                    String.format("%02d", toHour) + ":" +
+                    String.format("%02d", toMinute)
             );
         }
 

@@ -1,7 +1,6 @@
 package tea_manager.com.example.honza.tea_manager.Fragments;
 
 import android.content.Intent;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,13 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import tea_manager.com.example.honza.tea_manager.Activities.TeaPickerActivity;
+import tea_manager.com.example.honza.tea_manager.Activities.TeaPickedActivity;
+import tea_manager.com.example.honza.tea_manager.Objects.Tea;
 import tea_manager.com.example.honza.tea_manager.R;
 
 /**
  * A placeholder fragment containing a simple view.
  */
 public class ChooseTeaFragment extends Fragment {
+    public static final String TEA_TYPE_CHOSEN = "teaTypeChosen";
 
     public ChooseTeaFragment() {
     }
@@ -29,7 +30,8 @@ public class ChooseTeaFragment extends Fragment {
         greenTeaButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), TeaPickerActivity.class);
+                Intent intent = new Intent(v.getContext(), TeaPickedActivity.class);
+                intent.putExtra(TEA_TYPE_CHOSEN, Tea.teaType.Green);
                 startActivity(intent);
             }
         });
@@ -38,7 +40,8 @@ public class ChooseTeaFragment extends Fragment {
         blackTeaButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), TeaPickerActivity.class);
+                Intent intent = new Intent(v.getContext(), TeaPickedActivity.class);
+                intent.putExtra(TEA_TYPE_CHOSEN, Tea.teaType.Black);
                 startActivity(intent);
             }
         });
@@ -47,7 +50,8 @@ public class ChooseTeaFragment extends Fragment {
         otherButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), TeaPickerActivity.class);
+                Intent intent = new Intent(v.getContext(), TeaPickedActivity.class);
+                intent.putExtra(TEA_TYPE_CHOSEN, Tea.teaType.Other);
                 startActivity(intent);
             }
         });
@@ -56,7 +60,7 @@ public class ChooseTeaFragment extends Fragment {
         anyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), TeaPickerActivity.class);
+                Intent intent = new Intent(v.getContext(), TeaPickedActivity.class);
                 startActivity(intent);
             }
         });

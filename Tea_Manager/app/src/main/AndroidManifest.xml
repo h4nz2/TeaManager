@@ -38,7 +38,7 @@
                 android:value="tea_manager.com.example.honza.tea_manager.Activities.MainActivity" />
         </activity>
         <activity
-            android:name=".Activities.TeaPickerActivity"
+            android:name=".Activities.TeaPickedActivity"
             android:label="@string/title_activity_tea_picker"
             android:parentActivityName=".Activities.ChooseTeaActivity"
             android:theme="@style/AppTheme.NoActionBar">

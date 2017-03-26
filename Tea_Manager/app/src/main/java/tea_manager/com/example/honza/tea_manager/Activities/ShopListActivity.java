@@ -1,5 +1,6 @@
 package tea_manager.com.example.honza.tea_manager.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -23,8 +24,10 @@ public class ShopListActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //start activity in create mode
+                Intent intent = new Intent(ShopListActivity.this, ShopDetailActivity.class);
+                intent.putExtra(ShopDetailActivity.MODE, ShopDetailActivity.ADD_MODE);
+                startActivity(intent);
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -32,7 +35,7 @@ public class ShopListActivity extends AppCompatActivity {
         ShopListFragment mainFragment = new ShopListFragment();
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.mainFragment, mainFragment)
+                .replace(R.id.mainFragment, mainFragment)
                 .commit();
     }
 

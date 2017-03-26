@@ -32,6 +32,8 @@
     <string name="shopName">Shop name</string>
     <string name="opensAt">Opens at</string>
     <string name="closesAt">Closes at</string>
+    <string name="shopDetailAdd">Add new shop</string>
+    <string name="shopDetailEdit">Edit shop</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

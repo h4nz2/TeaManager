@@ -76,4 +76,35 @@ public class DBteaCRUD {
         db.delete(Tea.TABLE, Tea.KEY_ID + "= ?", new String[]{String.valueOf(tea.getID())});
         db.close();
     }
+
+    public List<Tea> getTeaGroup(Tea.teaType teaType){
+        //Open connection to read only
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String selectQuery = "SELECT  " +
+                Tea.KEY_ID + ',' +
+                Tea.KEY_NAME + ',' +
+                Tea.KEY_TYPE + ',' +
+                Tea.KEY_INFUSIONS +
+                " FROM " + Tea.TABLE +
+                " WHERE " + Tea.KEY_TYPE +
+                " = " + teaType.ordinal();
+        List<Tea> teaList = new ArrayList<Tea>();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                Tea tea = new Tea(
+                        cursor.getInt(cursor.getColumnIndex(Tea.KEY_ID)),
+                        cursor.getString(cursor.getColumnIndex(Tea.KEY_NAME)),
+                        /*get enum ordinal from the DB and turn it back to enum
+                        "COUGH" "COUGH" it was hard to write, it should be hard to read...*/
+                        Tea.teaType.values()[cursor.getInt(cursor.getColumnIndex(Tea.KEY_TYPE))],
+                        cursor.getInt(cursor.getColumnIndex(Tea.KEY_INFUSIONS))
+                );
+                teaList.add(tea);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return teaList;
+    }
 }

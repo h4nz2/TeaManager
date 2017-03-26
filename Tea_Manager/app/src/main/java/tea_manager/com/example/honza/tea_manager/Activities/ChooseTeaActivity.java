@@ -21,7 +21,7 @@ public class ChooseTeaActivity extends AppCompatActivity {
         ChooseTeaFragment mainFragment = new ChooseTeaFragment();
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.mainFragment, mainFragment)
+                .replace(R.id.mainFragment, mainFragment)
                 .commit();
     }
 

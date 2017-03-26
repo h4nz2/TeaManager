@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import tea_manager.com.example.honza.tea_manager.Activities.ShopDetailActivity;
 import tea_manager.com.example.honza.tea_manager.Objects.Shop;
 import tea_manager.com.example.honza.tea_manager.R;
 
@@ -70,19 +71,19 @@ public class ShopListAdpater extends RecyclerView.Adapter<ShopListAdpater.ViewHo
 
         @Override
         public void onClick(View v) {
-            /*Intent intent = new Intent(mContext, TeaDetailActivity.class);
-            intent.putExtra(TeaDetailActivity.TEA_TO_VIEW, mTeaList.get(getAdapterPosition()));
-            intent.putExtra(TeaDetailActivity.MODE, TeaDetailActivity.EDIT_MODE);
-            mContext.startActivity(intent);*/
+            Intent intent = new Intent(mContext, ShopDetailActivity.class);
+            intent.putExtra(ShopDetailActivity.SHOP_TO_VIEW, mShopList.get(getAdapterPosition()));
+            intent.putExtra(ShopDetailActivity.MODE, ShopDetailActivity.EDIT_MODE);
+            mContext.startActivity(intent);
         }
 
 
         @Override
         public boolean onLongClick(View v) {
-            /*DBteaCRUD dBteaCRUD = new DBteaCRUD(mContext);
-            dBteaCRUD.deleteTea(mTeaList.get(getAdapterPosition()));
-            updateList(dBteaCRUD.getAllTeas());
-            notifyDataSetChanged();*/
+            DBshopCRUD dBshopCRUD = new DBshopCRUD(mContext);
+            dBshopCRUD.deleteShop(mShopList.get(getAdapterPosition()));
+            updateList(dBshopCRUD.getAllShops());
+            notifyDataSetChanged();
             return true;
         }
     }

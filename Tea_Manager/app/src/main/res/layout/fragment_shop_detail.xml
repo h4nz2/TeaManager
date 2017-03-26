@@ -58,13 +58,15 @@
                 android:id="@+id/shopOpenToText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:inputType="number"/>
         </LinearLayout>
     </LinearLayout>
 
 
 
         <Button
+            android:id="@+id/submitButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/submit"/>

@@ -2,7 +2,6 @@ package tea_manager.com.example.honza.tea_manager.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 
 import tea_manager.com.example.honza.tea_manager.Fragments.TeaDetailFragment;
 import tea_manager.com.example.honza.tea_manager.Objects.Tea;

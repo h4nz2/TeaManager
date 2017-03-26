@@ -34,11 +34,10 @@ public class TeaListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_tea_list, container, false);
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.teaList);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(layoutManager);
 
-        DBteaCRUD dBteaCRUD = new DBteaCRUD(this.getContext());
-        mTeaList = dBteaCRUD.getAllTeas();
+        mTeaList = new ArrayList<Tea>();
 
         updateUI();
         return view;
@@ -57,7 +56,7 @@ public class TeaListFragment extends Fragment {
     public void onResume() {
         super.onResume();  // Always call the superclass method first
         // Create a DBteaCRUD object, and pass it the context of this activity
-        DBteaCRUD dbcrud = new DBteaCRUD(this.getContext());
+        DBteaCRUD dbcrud = new DBteaCRUD(getActivity());
         mTeaList = dbcrud.getAllTeas();
         mAdapter.updateList(mTeaList);
         mAdapter.notifyDataSetChanged();
