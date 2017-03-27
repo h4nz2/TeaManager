@@ -7,10 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import tea_manager.com.example.honza.tea_manager.Fragments.TeaListFiltersFragment;
 import tea_manager.com.example.honza.tea_manager.Fragments.TeaListFragment;
 import tea_manager.com.example.honza.tea_manager.R;
 
-public class TeaListActivity extends AppCompatActivity {
+public class TeaListActivity extends AppCompatActivity
+implements TeaListFiltersFragment.FiltersListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +32,23 @@ public class TeaListActivity extends AppCompatActivity {
             }
         });
 
-        TeaListFragment mainFragment = new TeaListFragment();
+        TeaListFragment mainFragment = TeaListFragment.newInstance(
+                TeaListFragment.TYPE_KEY, "Any", TeaListFragment.INFUSIONS_KEY, "Any");
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.mainFragment, mainFragment)
                 .commit();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public void onFiltersSaved(String teaType, String infusions) {
+        TeaListFragment filtersFragment = TeaListFragment.newInstance(
+                TeaListFragment.TYPE_KEY, teaType, TeaListFragment.INFUSIONS_KEY, infusions);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.mainFragment, filtersFragment)
+                .commit();
     }
 }

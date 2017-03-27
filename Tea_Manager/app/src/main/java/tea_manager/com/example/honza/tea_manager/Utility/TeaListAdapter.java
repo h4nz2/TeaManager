@@ -62,15 +62,15 @@ public class TeaListAdapter extends RecyclerView.Adapter<TeaListAdapter.ViewHold
             super(view);
             teaNameView = (TextView) view.findViewById(R.id.teaNameEditText);
             teaTypeView = (TextView) view.findViewById(R.id.teaTypeSpinner);
-            teaInfusionsView = (TextView) view.findViewById(R.id.teaInfusionsPicker);
+            teaInfusionsView = (TextView) view.findViewById(R.id.teaInfusionsSpinner);
             view.setOnClickListener(this);
             view.setOnLongClickListener(this);
         }
 
         public void populateRow(Tea tea){
             teaNameView.setText(tea.getName());
-            teaTypeView.setText(tea.getType().toString());
-            teaInfusionsView.setText(Integer.toString(tea.getInfusions()));
+            teaTypeView.setText(tea.getType().toString() + ",");
+            teaInfusionsView.setText("Infusions: " + Integer.toString(tea.getInfusions()));
         }
 
         @Override

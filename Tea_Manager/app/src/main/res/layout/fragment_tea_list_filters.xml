@@ -1,0 +1,49 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="tea_manager.com.example.honza.tea_manager.Fragments.TeaListFiltersFragment"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/filters"
+        style="@style/myTitleText"/>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/teaType"
+        android:textAppearance="@style/myHeading"/>
+    <Spinner
+        android:id="@+id/teaTypeSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/mySubHeading"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/teaInfusions"
+        android:textAppearance="@style/myHeading"/>
+    <Spinner
+        android:id="@+id/teaInfusionsSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/mySubHeading"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/submitButton"
+        android:text="@string/saveChanges"
+        style="@style/myHeading"/>
+    </LinearLayout>
+
+
+</ScrollView>

@@ -12,10 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 
-import tea_manager.com.example.honza.tea_manager.Activities.MainActivity;
-import tea_manager.com.example.honza.tea_manager.Activities.ShopDetailActivity;
 import tea_manager.com.example.honza.tea_manager.Activities.TeaDetailActivity;
 import tea_manager.com.example.honza.tea_manager.Objects.Tea;
 import tea_manager.com.example.honza.tea_manager.R;
@@ -83,8 +80,8 @@ public class TeaDetailFragment extends Fragment {
         typeSpinner = (Spinner) view.findViewById(R.id.teaTypeSpinner);
         //populate spinner
         typeSpinner.setAdapter(new ArrayAdapter<Tea.teaType>(
-                this.getContext(), android.R.layout.simple_spinner_item, Tea.teaType.values()));
-        infusionsPicker = (NumberPicker) view.findViewById(R.id.teaInfusionsPicker);
+                this.getContext(), R.layout.my_spinner_item, Tea.teaType.values()));
+        infusionsPicker = (NumberPicker) view.findViewById(R.id.teaInfusionsSpinner);
         //set min and max value of number picker
         infusionsPicker.setMinValue(MIN_INFUSIONS);
         infusionsPicker.setMaxValue(MAX_INFUSIONS);
