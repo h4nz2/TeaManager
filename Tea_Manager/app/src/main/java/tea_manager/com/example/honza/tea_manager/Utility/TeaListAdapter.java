@@ -1,8 +1,11 @@
 package tea_manager.com.example.honza.tea_manager.Utility;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,10 +87,25 @@ public class TeaListAdapter extends RecyclerView.Adapter<TeaListAdapter.ViewHold
 
         @Override
         public boolean onLongClick(View v) {
-            DBteaCRUD dBteaCRUD = new DBteaCRUD(mContext);
-            dBteaCRUD.deleteTea(mTeaList.get(getAdapterPosition()));
-            updateList(dBteaCRUD.getAllTeas());
-            notifyDataSetChanged();
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
+            alertDialogBuilder.setCancelable(false);
+            alertDialogBuilder.setTitle("Remove tea ?");
+            alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    DBteaCRUD dBteaCRUD = new DBteaCRUD(mContext);
+                    dBteaCRUD.deleteTea(mTeaList.get(getAdapterPosition()));
+                    updateList(dBteaCRUD.getAllTeas());
+                    notifyDataSetChanged();
+                }
+            });
+            alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            alertDialogBuilder.show();
             return true;
         }
     }

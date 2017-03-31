@@ -5,20 +5,17 @@
     tools:context="tea_manager.com.example.honza.tea_manager.Fragments.ShopDetailFragment"
     android:orientation="vertical">
 
-        android:id="@+id/mainFragment"
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:text="@string/shopName"
+        android:textAppearance="@style/myHeading"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/shopName" />
-
-        <EditText
-            android:id="@+id/shopNameEdit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/shopNameEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/mySubHeading"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,13 +31,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/opensAt"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:textAppearance="@style/myHeading"/>
 
             <TextView
                 android:id="@+id/shopOpenFromText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:textAppearance="@style/mySubHeading"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
@@ -52,14 +51,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/closesAt"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:textAppearance="@style/myHeading"/>
 
             <TextView
                 android:id="@+id/shopOpenToText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:inputType="number"/>
+                android:inputType="number"
+                android:textAppearance="@style/mySubHeading"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -69,6 +70,7 @@
             android:id="@+id/submitButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/submit"/>
+            android:text="@string/submit"
+            android:layout_margin="10dp"/>
 
 </LinearLayout>

@@ -30,7 +30,11 @@ public class Shop implements Serializable {
     private String name;
     private OpeningHours openingHours;
 
-    public Shop(){};
+    public Shop(){
+        /*sets time to 0, timePicker will crash without this,
+        because of NullPointerEception when getting opening time */
+        openingHours = new OpeningHours();
+    };
     public Shop(int ID, String name, OpeningHours openingHours){
         this.ID = ID;
         this.name = name;
@@ -50,7 +54,12 @@ public class Shop implements Serializable {
         private int toHour;
         private int toMinute;
 
-        public OpeningHours(){}
+        public OpeningHours(){
+            fromHour = 0;
+            fromMinute = 0;
+            fromHour = 0;
+            fromMinute = 0;
+        }
 
         public OpeningHours(int fromHour, int fromMinute, int toHour, int toMinute){
             this.fromHour = fromHour;

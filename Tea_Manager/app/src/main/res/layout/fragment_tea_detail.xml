@@ -9,12 +9,14 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/teaName" />
+            android:text="@string/teaName"
+            android:textAppearance="@style/myHeading"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/teaNameEditText"/>
+            android:id="@+id/teaNameEditText"
+            android:textAppearance="@style/mySubHeading"/>
 
         <TableLayout
             android:layout_width="match_parent"
@@ -25,26 +27,31 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/teaType"/>
+                    android:text="@string/teaType"
+                    android:textAppearance="@style/myHeading"/>
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/teaInfusions"/>
+                    android:text="@string/teaInfusions"
+                    android:textAppearance="@style/myHeading"/>
             </TableRow>
             <TableRow>
                 <Spinner
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:id="@+id/teaTypeSpinner"/>
+                    android:id="@+id/teaTypeSpinner"
+                    android:background="#EEE"
+                    android:layout_margin="10dp"/>
 
                 <NumberPicker
                     android:id="@+id/teaInfusionsSpinner"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    style="@style/mySubHeading"/>
             </TableRow>
         </TableLayout>
 

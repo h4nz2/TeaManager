@@ -7,5 +7,7 @@
         android:layout_height="wrap_content"
         android:ellipsize="marquee"
         android:textAlignment="inherit"
-        android:padding="6dp"
-        android:textAppearance="@style/mySubHeading"/>
+        android:padding="10dp"
+        android:textAppearance="@style/myHeading"
+        android:textStyle="italic"
+    />

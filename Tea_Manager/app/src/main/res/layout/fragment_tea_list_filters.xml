@@ -36,13 +36,14 @@
         android:id="@+id/teaInfusionsSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/mySubHeading"/>
+        style="@style/mySubHeading"
+        />
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/submitButton"
         android:text="@string/saveChanges"
-        style="@style/myHeading"/>
+        android:textAppearance="@style/myHeading" />
     </LinearLayout>
 
 

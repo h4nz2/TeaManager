@@ -27,8 +27,8 @@
 
     <!-->Tea Detail<-->
     <string name="teaName">Tea name</string>
-    <string name="teaType">Type</string>
-    <string name="teaInfusions">Infusions</string>
+    <string name="teaType">Type:</string>
+    <string name="teaInfusions">Infusions:</string>
     <string name="teaDetailAdd">Add new tea</string>
     <string name="teaDetailEdit">Edit tea</string>
     <string name="saveChanges">Save changes</string>

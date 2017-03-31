@@ -16,12 +16,13 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="20dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/filtersButton" />
+        app:layout_constraintTop_toBottomOf="@+id/filtersButton"
+        />
 
     <Button
         android:id="@+id/filtersButton"
@@ -29,10 +30,12 @@
         android:layout_height="wrap_content"
         android:text="@string/filters"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginEnd="8dp" />
+        android:layout_marginEnd="8dp"
+        android:background="@color/colorAccent"
+        android:padding="10dp" />
 
     <TableLayout
         android:layout_width="wrap_content"
@@ -49,11 +52,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/teaType"
+                android:textAppearance="@style/myHeading"
                 app:layout_constraintTop_toTopOf="parent" />
             <TextView
                 android:id="@+id/teaTypeFiltersText"
                 android:layout_height="wrap_content"
-                android:text="@string/any" />
+                android:text="@string/any"
+                android:textAppearance="@style/mySubHeading"/>
         </TableRow>
 
         <TableRow>
@@ -61,11 +66,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/teaInfusions"
-                android:paddingRight="8dp"/>
+                android:paddingRight="8dp"
+                android:textAppearance="@style/myHeading"/>
             <TextView
                 android:layout_height="wrap_content"
                 android:id="@+id/teaInfusionsFiltersText"
-                android:text="@string/any"/>
+                android:text="@string/any"
+                android:textAppearance="@style/mySubHeading"/>
         </TableRow>
 
     </TableLayout>

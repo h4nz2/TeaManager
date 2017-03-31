@@ -1,8 +1,11 @@
 package tea_manager.com.example.honza.tea_manager.Utility;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,10 +83,25 @@ public class ShopListAdpater extends RecyclerView.Adapter<ShopListAdpater.ViewHo
 
         @Override
         public boolean onLongClick(View v) {
-            DBshopCRUD dBshopCRUD = new DBshopCRUD(mContext);
-            dBshopCRUD.deleteShop(mShopList.get(getAdapterPosition()));
-            updateList(dBshopCRUD.getAllShops());
-            notifyDataSetChanged();
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
+            alertDialogBuilder.setCancelable(false);
+            alertDialogBuilder.setTitle("Remove shop ?");
+            alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    DBshopCRUD dBshopCRUD = new DBshopCRUD(mContext);
+                    dBshopCRUD.deleteShop(mShopList.get(getAdapterPosition()));
+                    updateList(dBshopCRUD.getAllShops());
+                    notifyDataSetChanged();
+                }
+            });
+            alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            alertDialogBuilder.show();
             return true;
         }
     }

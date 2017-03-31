@@ -18,9 +18,7 @@ import tea_manager.com.example.honza.tea_manager.R;
 import tea_manager.com.example.honza.tea_manager.Utility.DBteaCRUD;
 import tea_manager.com.example.honza.tea_manager.Utility.TeaListAdapter;
 
-/**
- * A placeholder fragment containing a simple view.
- */
+
 public class TeaListFragment extends Fragment{
     public static final String FILTERS_TAG = "filtersTag";
     public static final String TYPE_KEY = "typeKey";
@@ -71,6 +69,7 @@ public class TeaListFragment extends Fragment{
         recyclerView = (RecyclerView) view.findViewById(R.id.teaList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
 
         mTeaList = new ArrayList<Tea>();
 

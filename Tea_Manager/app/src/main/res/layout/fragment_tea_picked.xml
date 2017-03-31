@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="tea_manager.com.example.honza.tea_manager.Fragments.TeaPickedFragment"
-    tools:showIn="@layout/activity_tea_picked">
+    tools:showIn="@layout/activity_tea_picked"
+    android:theme="@style/myHeading">
 
 
 
@@ -20,19 +21,20 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:id="@+id/linearLayout">
+        android:id="@+id/linearLayout"
+        >
 
         <Button
             android:id="@+id/chooseAnotherButton"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/chooseAnotherTea" />
 
         <Button
             android:id="@+id/thanksButton"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/thanksButton" />
     </LinearLayout>

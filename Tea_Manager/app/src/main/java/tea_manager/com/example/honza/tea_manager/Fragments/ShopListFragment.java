@@ -15,9 +15,7 @@ import tea_manager.com.example.honza.tea_manager.R;
 import tea_manager.com.example.honza.tea_manager.Utility.DBshopCRUD;
 import tea_manager.com.example.honza.tea_manager.Utility.ShopListAdpater;
 
-/**
- * A placeholder fragment containing a simple view.
- */
+
 public class ShopListFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private ShopListAdpater mAdapter;
@@ -34,6 +32,7 @@ public class ShopListFragment extends Fragment {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.shopListRecycler);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setHasFixedSize(true);
 
         DBshopCRUD dBshopCRUD = new DBshopCRUD(getActivity());
         mShopList = dBshopCRUD.getAllShops();

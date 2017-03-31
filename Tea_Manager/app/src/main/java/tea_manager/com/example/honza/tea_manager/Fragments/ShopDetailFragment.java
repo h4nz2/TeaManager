@@ -1,6 +1,7 @@
 package tea_manager.com.example.honza.tea_manager.Fragments;
 
 
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import tea_manager.com.example.honza.tea_manager.Activities.ShopDetailActivity;
 import tea_manager.com.example.honza.tea_manager.Objects.Shop;
@@ -97,14 +99,39 @@ public class ShopDetailFragment extends Fragment{
         openFromColumn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                TimePickerDialog  timePickerDialog = new TimePickerDialog(getActivity(),
+                        new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                                mShop.getOpeningHours().setFromHour(hourOfDay);
+                                mShop.getOpeningHours().setFromMinute(minute);
+                                fillShopInfo(mShop);
+                            }
+                },
+                        mShop.getOpeningHours().getFromHour(),
+                        mShop.getOpeningHours().getFromMinute(),
+                        true);
+                timePickerDialog.show();
             }
         });
         //set closing time
         openToColumn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                TimePickerDialog  timePickerDialog = new TimePickerDialog(
+                        getActivity(),
+                        new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                                mShop.getOpeningHours().setToHour(hourOfDay);
+                                mShop.getOpeningHours().setToMinute(minute);
+                                fillShopInfo(mShop);
+                            }
+                        },
+                        mShop.getOpeningHours().getToHour(),
+                        mShop.getOpeningHours().getToMinute(),
+                        true);
+                timePickerDialog.show();
             }
         });
 
@@ -112,7 +139,11 @@ public class ShopDetailFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 mShop.setName(nameEdit.getText().toString());
-                mShop.setOpeningHours(new Shop.OpeningHours(10, 30, 15, 0));
+                mShop.setOpeningHours(new Shop.OpeningHours(
+                        mShop.getOpeningHours().getFromHour(),
+                        mShop.getOpeningHours().getFromMinute(),
+                        mShop.getOpeningHours().getToHour(),
+                        mShop.getOpeningHours().getToMinute()));
                 DBshopCRUD dBshopCRUD = new DBshopCRUD(getContext());
 
                 if(mMode == ShopDetailActivity.ADD_MODE) {
