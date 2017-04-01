@@ -1,6 +1,7 @@
 package tea_manager.com.example.honza.tea_manager.Fragments;
 
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,7 @@ import tea_manager.com.example.honza.tea_manager.Activities.TeaDetailActivity;
 import tea_manager.com.example.honza.tea_manager.Objects.Tea;
 import tea_manager.com.example.honza.tea_manager.R;
 import tea_manager.com.example.honza.tea_manager.Utility.DBteaCRUD;
+import tea_manager.com.example.honza.tea_manager.Utility.TeaContentProvider;
 
 
 /**
@@ -105,12 +107,23 @@ public class TeaDetailFragment extends Fragment {
                 mTea.setName(nameEdit.getText().toString());
                 mTea.setType(Tea.teaType.valueOf(typeSpinner.getSelectedItem().toString()));
                 mTea.setInfusions(infusionsPicker.getValue());
-                DBteaCRUD dBteaCRUD = new DBteaCRUD(getContext());
+
+                ContentValues values = new ContentValues();
+                values.put(Tea.KEY_NAME, mTea.getName());
+                values.put(Tea.KEY_TYPE, mTea.getType().ordinal());
+                values.put(Tea.KEY_INFUSIONS, mTea.getInfusions());
 
                 if(mMode == TeaDetailActivity.ADD_MODE) {
-                    dBteaCRUD.addTea(mTea);
+                    getContext().getContentResolver().insert(
+                            TeaContentProvider.CONTENT_URI,
+                            values);
                 }else {
-                    dBteaCRUD.updateTea(mTea);
+                    String[] args = {Integer.toString(mTea.getID())};
+                    getContext().getContentResolver().update(
+                            TeaContentProvider.CONTENT_URI,
+                            values,
+                            Tea.KEY_ID + " = ?",
+                            args);
                 }
 
                 if(mFragmentListener == null)

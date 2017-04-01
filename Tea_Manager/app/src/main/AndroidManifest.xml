@@ -57,6 +57,12 @@
         </activity>
         <activity android:name=".Activities.TeaDetailActivity" />
         <activity android:name=".Activities.ShopDetailActivity"></activity>
+
+        <provider
+            android:authorities="com.example.honza.tea_manager.teacontentprovider"
+            android:name=".Utility.TeaContentProvider"
+            android:exported="false"
+            />
     </application>
 
 </manifest>

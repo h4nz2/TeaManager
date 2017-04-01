@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,12 +24,13 @@ import tea_manager.com.example.honza.tea_manager.R;
  */
 
 public class TeaListAdapter extends RecyclerView.Adapter<TeaListAdapter.ViewHolder> {
-    private List<Tea> mTeaList;
     private final Context mContext;
+    private TeaCursorWrapper mCursor;
 
-    public TeaListAdapter(List<Tea> list, Context context){
-        this.mTeaList = list;
+    public TeaListAdapter(Context context, Cursor cursor){
         this.mContext = context;
+        swapCursor(cursor);
+        setHasStableIds(true);
     }
 
     @Override
@@ -38,28 +41,50 @@ public class TeaListAdapter extends RecyclerView.Adapter<TeaListAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.populateRow(mTeaList.get(position));
+        // When the cursor can't move to given position, it will crash and burn.
+        if (mCursor == null || !mCursor.moveToPosition(position)) {
+            throw new IllegalStateException();
+        }
+
+        Tea tea = mCursor.getTea();
+
+        holder.populateRow(tea);
     }
 
     @Override
     public int getItemCount() {
-        return mTeaList.size();
+        if (mCursor == null) {
+            return 0;
+        }
+        return mCursor.getCount();
     }
 
     @Override
     public long getItemId(int position) {
-        return mTeaList.get(position).getID();
+        if (mCursor == null || !mCursor.moveToPosition(position)) {
+            return 0;
+        }
+        int idColumnIndex = mCursor.getColumnIndex(Tea.KEY_ID);
+        return mCursor.getLong(idColumnIndex);
     }
 
-    public void updateList(List<Tea> newList){
-        mTeaList.clear();
-        mTeaList.addAll(newList);
+    public void swapCursor(Cursor cursor) {
+            /*If the given cursor isn't null, we can use it to fetch Device objects.
+            Otherwise we have to notify the adapter that there is no cursor and thus no data.*/
+        if (cursor != null) {
+            mCursor = new TeaCursorWrapper(cursor);
+            notifyDataSetChanged();
+        } else {
+            mCursor = null;
+            notifyItemRangeRemoved(0, getItemCount());
+        }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
         private TextView teaNameView;
         private TextView teaTypeView;
         private TextView teaInfusionsView;
+        private int id;
 
         public ViewHolder(View view) {
             super(view);
@@ -74,28 +99,30 @@ public class TeaListAdapter extends RecyclerView.Adapter<TeaListAdapter.ViewHold
             teaNameView.setText(tea.getName());
             teaTypeView.setText(tea.getType().toString() + ",");
             teaInfusionsView.setText("Infusions: " + Integer.toString(tea.getInfusions()));
+            id = tea.getID();
         }
 
         @Override
         public void onClick(View v) {
+            mCursor.moveToPosition(getAdapterPosition());
+            TeaCursorWrapper teaCursorWrapper = new TeaCursorWrapper(mCursor);
             Intent intent = new Intent(mContext, TeaDetailActivity.class);
-            intent.putExtra(TeaDetailActivity.TEA_TO_VIEW, mTeaList.get(getAdapterPosition()));
+            intent.putExtra(TeaDetailActivity.TEA_TO_VIEW, teaCursorWrapper.getTea());
             intent.putExtra(TeaDetailActivity.MODE, TeaDetailActivity.EDIT_MODE);
             mContext.startActivity(intent);
         }
 
-
         @Override
         public boolean onLongClick(View v) {
+            final View view = v;
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
             alertDialogBuilder.setCancelable(false);
             alertDialogBuilder.setTitle("Remove tea ?");
             alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    DBteaCRUD dBteaCRUD = new DBteaCRUD(mContext);
-                    dBteaCRUD.deleteTea(mTeaList.get(getAdapterPosition()));
-                    updateList(dBteaCRUD.getAllTeas());
+                    String[] args = {Integer.toString(id)};
+                    view.getContext().getContentResolver().delete(TeaContentProvider.CONTENT_URI, Tea.KEY_ID + " = ?", args);
                     notifyDataSetChanged();
                 }
             });

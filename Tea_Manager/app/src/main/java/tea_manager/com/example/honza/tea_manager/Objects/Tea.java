@@ -15,6 +15,9 @@ public class Tea implements Serializable{
     public static final String KEY_TYPE = "type";
     public static final String KEY_INFUSIONS = "infusions";
 
+    public static final String[] ALL_COLUMNS =
+            {KEY_ID, KEY_NAME, KEY_TYPE, KEY_INFUSIONS};
+
     public enum teaType{
         Black,
         Green,
