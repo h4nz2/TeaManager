@@ -34,7 +34,7 @@
         android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginEnd="8dp"
-        android:background="@color/colorAccent"
+        style="@style/myButton"
         android:padding="10dp" />
 
     <TableLayout

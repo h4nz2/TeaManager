@@ -19,13 +19,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="-shopName-"
-            android:textAppearance="@style/myHeading"/>
+            android:textAppearance="@style/myHeading.white"/>
 
         <TextView
             android:id="@+id/shopOpeningHours"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="-openingHours-"
-            android:textAppearance="@style/mySubHeading"/>
+            android:textAppearance="@style/mySubHeading.white"/>
     </LinearLayout>
 </LinearLayout>

@@ -36,7 +36,7 @@ public class ChooseTeaFragment extends Fragment {
             }
         });
 
-        Button blackTeaButton = (Button) view.findViewById(R.id.bloackTeaButton);
+        Button blackTeaButton = (Button) view.findViewById(R.id.blackTeaButton);
         blackTeaButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="tea_manager.com.example.honza.tea_manager.Fragments.ChooseTeaFragment"
-    tools:showIn="@layout/activity_choose_tea">
+    tools:context="tea_manager.com.example.honza.tea_manager.Fragments.ChooseTeaFragment">
 
     <LinearLayout
         android:layout_width="0dp"
@@ -36,18 +35,21 @@
             android:layout_marginTop="8dp"
             android:elevation="0dp"
             android:text="@string/greenTea"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            style="@style/myButton"/>
 
         <Button
-            android:id="@+id/bloackTeaButton"
+            android:id="@+id/blackTeaButton"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginEnd="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
             android:text="@string/blackTea"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            style="@style/myButton"/>
 
         <Button
             android:id="@+id/otherButton"
@@ -59,7 +61,8 @@
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:text="@string/other"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            style="@style/myButton"/>
 
         <Button
             android:id="@+id/anyButton"
@@ -72,6 +75,7 @@
             android:layout_marginStart="8dp"
             android:text="@string/any"
             android:layout_weight="1"
+            style="@style/myButton"
             />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

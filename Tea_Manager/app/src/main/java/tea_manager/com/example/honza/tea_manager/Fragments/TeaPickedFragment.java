@@ -63,7 +63,7 @@ public class TeaPickedFragment extends Fragment {
         thanksButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), MainActivity.class);
+                Intent intent = new Intent(getActivity(), MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
@@ -73,7 +73,7 @@ public class TeaPickedFragment extends Fragment {
         chooseAnotherbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), ChooseTeaActivity.class);
+                Intent intent = new Intent(getActivity(), ChooseTeaActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
