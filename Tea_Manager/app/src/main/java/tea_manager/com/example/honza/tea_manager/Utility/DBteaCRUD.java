@@ -10,10 +10,6 @@ import java.util.List;
 
 import tea_manager.com.example.honza.tea_manager.Objects.Tea;
 
-/**
- * Created by Honza on 24/03/2017.
- */
-
 public class DBteaCRUD {
     private final DBHelper dbHelper;
 

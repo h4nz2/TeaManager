@@ -23,6 +23,8 @@ import tea_manager.com.example.honza.tea_manager.R;
 import tea_manager.com.example.honza.tea_manager.Utility.TeaContentProvider;
 import tea_manager.com.example.honza.tea_manager.Utility.TeaListAdapter;
 
+import static tea_manager.com.example.honza.tea_manager.Fragments.TeaListFiltersFragment.ANY;
+
 
 public class TeaListFragment extends Fragment
         implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -92,17 +94,23 @@ public class TeaListFragment extends Fragment
 
     @Override
     public void onResume() {
-        /*
-        * musis obnovit filtry a pak naprogramuj nacitani z filtru
-        * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        * */
         super.onResume();
 
         //get type and infusons and update filters text
         Bundle args = getArguments();
         String type = args.getString(TYPE_KEY);
         String infusions = args.getString(INFUSIONS_KEY);
+
+        if(type == ANY)
+            teaTypeFilter = 3;
+        else
+            teaTypeFilter = Tea.teaType.valueOf(type).ordinal();
         typeTextView.setText(type);
+
+        if(infusions == ANY)
+            teaInfusionsFilter = 3;
+        else
+            teaInfusionsFilter = Integer.valueOf(infusions) - 1;
         infusionsTextView.setText(infusions);
 
         getLoaderManager().restartLoader(0, null, this);
@@ -110,7 +118,40 @@ public class TeaListFragment extends Fragment
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return new CursorLoader(getActivity(), TeaContentProvider.CONTENT_URI, null, null, null, Tea.KEY_NAME + " ASC");
+        //return everything
+        if(teaInfusionsFilter == 3 && teaTypeFilter == 3)
+            return new CursorLoader(getActivity(), TeaContentProvider.CONTENT_URI, null, null, null, Tea.KEY_NAME + " ASC");
+        //infusions == any, filter by type
+        else if(teaInfusionsFilter == 3) {
+            String[] whereArgs = {Integer.toString(teaTypeFilter)};
+            return new CursorLoader(
+                    getActivity(),
+                    TeaContentProvider.CONTENT_URI,
+                    null,
+                    Tea.KEY_TYPE + " = ?",
+                    whereArgs,
+                    Tea.KEY_NAME + " ASC");
+        }//type == any, filter by infusions
+        else if (teaTypeFilter == 3) {
+            String[] whereArgs = {Integer.toString(teaInfusionsFilter + 1)};
+            return new CursorLoader(
+                    getActivity(),
+                    TeaContentProvider.CONTENT_URI,
+                    null,
+                    Tea.KEY_INFUSIONS + " = ?",
+                    whereArgs,
+                    Tea.KEY_NAME + " ASC");
+        }//filter by both type and infusions
+        else {
+            String[] whereArgs = {Integer.toString(teaInfusionsFilter + 1), Integer.toString(teaTypeFilter)};
+            return new CursorLoader(
+                    getActivity(),
+                    TeaContentProvider.CONTENT_URI,
+                    null,
+                    Tea.KEY_INFUSIONS + " = ? AND " + Tea.KEY_TYPE + " = ?",
+                    whereArgs,
+                    Tea.KEY_NAME + " ASC");
+        }
     }
 
     @Override

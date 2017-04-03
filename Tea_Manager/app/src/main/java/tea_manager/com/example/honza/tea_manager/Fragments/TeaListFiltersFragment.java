@@ -27,7 +27,7 @@ public class TeaListFiltersFragment extends android.support.v4.app.DialogFragmen
     private Spinner teaTypeSpinner;
     private Spinner teaInfusionsSpinner;
     private List<String> mTypeFilterValues;
-    private final String[] infusionsSpinnerValues = {"1", "2", "3", "All"};
+    private final String[] infusionsSpinnerValues = {"1", "2", "3", ANY};
     private FiltersListener mFiltersListener;
 
     public TeaListFiltersFragment() {
@@ -77,11 +77,10 @@ public class TeaListFiltersFragment extends android.support.v4.app.DialogFragmen
                 this.getContext(), R.layout.my_spinner_item, infusionsSpinnerValues));
 
         Bundle args = getArguments();
-        teaTypeSpinner.setSelection(args.getInt(TeaListFragment.TYPE_KEY));
-        teaInfusionsSpinner.setSelection(args.getInt(TeaListFragment.INFUSIONS_KEY));
-
-
-        updateFilters(3, 3);
+        updateFilters(
+                args.getInt(TeaListFragment.TYPE_KEY),
+                args.getInt(TeaListFragment.INFUSIONS_KEY)
+        );
 
         submitButton = (Button) view.findViewById(R.id.submitButton);
         submitButton.setOnClickListener(new View.OnClickListener() {

@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/submitButton"
         android:text="@string/saveChanges"
-        android:textAppearance="@style/myHeading" />
+        style="@style/myButton"/>
     </LinearLayout>
 
 

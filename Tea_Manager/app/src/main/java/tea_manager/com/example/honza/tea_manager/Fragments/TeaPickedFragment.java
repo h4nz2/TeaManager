@@ -64,13 +64,15 @@ implements LoaderManager.LoaderCallbacks{
         getLoaderManager().initLoader(1, null, this);
 
         String[] whereArgs = new String[1];
+        Cursor cursor;
         if(mTeatype == null)
-            whereArgs[0] = "*";
-        else
+            cursor = getContext().getContentResolver().query(
+                    TeaContentProvider.CONTENT_URI, null, null, null, null);
+        else {
             whereArgs[0] = Integer.toString(mTeatype.ordinal());
-
-        Cursor cursor = getContext().getContentResolver().query(
-                TeaContentProvider.CONTENT_URI, null, Tea.KEY_TYPE + " = ?", whereArgs, null);
+            cursor = getContext().getContentResolver().query(
+                    TeaContentProvider.CONTENT_URI, null, Tea.KEY_TYPE + " = ?", whereArgs, null);
+        }
 
         mTeaList = new ArrayList<Tea>();
         //here it need checking if there are any teas in the db meeting the chosen criteria
