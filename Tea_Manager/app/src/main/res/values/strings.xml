@@ -43,5 +43,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="noTeaFound">Sorry, no teas matching criteria found :-(</string>
+    <string name="thatSucks">That sucks!</string>
 
 </resources>

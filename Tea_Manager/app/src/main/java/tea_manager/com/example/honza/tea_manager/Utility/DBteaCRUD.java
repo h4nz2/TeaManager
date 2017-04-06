@@ -10,6 +10,9 @@ import java.util.List;
 
 import tea_manager.com.example.honza.tea_manager.Objects.Tea;
 
+/**
+ * This class has been replaced by content provider, it just feels like a shame to delete it just like that.
+ */
 public class DBteaCRUD {
     private final DBHelper dbHelper;
 
