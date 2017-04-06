@@ -1,6 +1,8 @@
 package tea_manager.com.example.honza.tea_manager.Fragments;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v4.app.Fragment;
@@ -28,8 +30,7 @@ import tea_manager.com.example.honza.tea_manager.Utility.TeaContentProvider;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class TeaPickedFragment extends Fragment
-implements LoaderManager.LoaderCallbacks{
+public class TeaPickedFragment extends Fragment{
     private List<Tea> mTeaList;
     private Tea.teaType mTeatype;
 
@@ -61,8 +62,6 @@ implements LoaderManager.LoaderCallbacks{
         Bundle args = getArguments();
         mTeatype = (Tea.teaType) args.getSerializable(ChooseTeaFragment.TEA_TYPE_CHOSEN);
 
-        getLoaderManager().initLoader(1, null, this);
-
         String[] whereArgs = new String[1];
         Cursor cursor;
         if(mTeatype == null)
@@ -75,7 +74,6 @@ implements LoaderManager.LoaderCallbacks{
         }
 
         mTeaList = new ArrayList<Tea>();
-        //here it need checking if there are any teas in the db meeting the chosen criteria
         if (cursor.moveToFirst()) {
             do {
                 Tea tea = new Tea(
@@ -87,28 +85,44 @@ implements LoaderManager.LoaderCallbacks{
                 mTeaList.add(tea);
             } while (cursor.moveToNext());
         }
+        if(mTeaList.size()<=0){
+            new AlertDialog.Builder(getActivity())
+                    .setTitle(R.string.noTeaFound)
+                    .setNeutralButton(R.string.thatSucks, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(getActivity(), ChooseTeaActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
+                        }
+                    })
+                    .setCancelable(false)
+                    .show();
+        }
+        else {
+            chooseTea(mTeaList);
 
-        chooseTea(mTeaList);
+            Button thanksButton = (Button) view.findViewById(R.id.thanksButton);
+            thanksButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                }
+            });
 
-        Button thanksButton = (Button) view.findViewById(R.id.thanksButton);
-        thanksButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
-        });
-
-        Button chooseAnotherbutton = (Button) view.findViewById(R.id.chooseAnotherButton);
-        chooseAnotherbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ChooseTeaActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
-        });
+            Button chooseAnotherbutton = (Button) view.findViewById(R.id.chooseAnotherButton);
+            chooseAnotherbutton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), ChooseTeaActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                }
+            });
+            return view;
+        }
         return view;
     }
 
@@ -119,26 +133,5 @@ implements LoaderManager.LoaderCallbacks{
         teaNameView.setText(chosenTea.getName());
         teaTypeView.setText(chosenTea.getType().toString());
         teaInfusionsView.setText("Infusions: " + Integer.toString(chosenTea.getInfusions()));
-    }
-
-    @Override
-    public Loader onCreateLoader(int id, Bundle args) {
-        String[] whereArgs = new String[1];
-        if(mTeatype == null)
-            whereArgs[0] = "*";
-        else
-            whereArgs[0] = Integer.toString(mTeatype.ordinal());
-        return new Loader(getContext());
-        //getActivity(), TeaContentProvider.CONTENT_URI, null, Tea.KEY_TYPE + " = ?", whereArgs, null
-    }
-
-    @Override
-    public void onLoadFinished(Loader loader, Object data) {
-
-    }
-
-    @Override
-    public void onLoaderReset(Loader loader) {
-
     }
 }
