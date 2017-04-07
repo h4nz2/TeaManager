@@ -81,5 +81,11 @@
             android:text="-infusions-"
             android:layout_margin="10dp"
             />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/teaImage"
+            android:layout_margin="10dp"
+            android:src="@drawable/ic_tea_default_black_24dp"/>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

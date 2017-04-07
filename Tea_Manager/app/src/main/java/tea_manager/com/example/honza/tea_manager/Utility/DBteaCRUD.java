@@ -12,9 +12,12 @@ import tea_manager.com.example.honza.tea_manager.Objects.Tea;
 
 /**
  * This class has been replaced by content provider, it just feels like a shame to delete it just like that.
+ * ...and it also does not take into account teaImage, as I added that crap later...
+ * I put the whole content into comments, so uncomment it if you're brave enough
+ * ..just kidding, of course you're not brave enough
  */
 public class DBteaCRUD {
-    private final DBHelper dbHelper;
+   /* private final DBHelper dbHelper;
 
     public DBteaCRUD(Context context){
         dbHelper = new DBHelper(context);
@@ -47,8 +50,8 @@ public class DBteaCRUD {
                 Tea tea = new Tea(
                         cursor.getInt(cursor.getColumnIndex(Tea.KEY_ID)),
                         cursor.getString(cursor.getColumnIndex(Tea.KEY_NAME)),
-                        /*get enum ordinal from the DB and turn it back to enum
-                        "COUGH" "COUGH" it was hard to write, it should be hard to read...*/
+                        *//*get enum ordinal from the DB and turn it back to enum
+                        "COUGH" "COUGH" it was hard to write, it should be hard to read...*//*
                         Tea.teaType.values()[cursor.getInt(cursor.getColumnIndex(Tea.KEY_TYPE))],
                         cursor.getInt(cursor.getColumnIndex(Tea.KEY_INFUSIONS))
                 );
@@ -94,8 +97,8 @@ public class DBteaCRUD {
                 Tea tea = new Tea(
                         cursor.getInt(cursor.getColumnIndex(Tea.KEY_ID)),
                         cursor.getString(cursor.getColumnIndex(Tea.KEY_NAME)),
-                        /*get enum ordinal from the DB and turn it back to enum
-                        "COUGH" "COUGH" it was hard to write, it should be hard to read...*/
+                        *//*get enum ordinal from the DB and turn it back to enum
+                        "COUGH" "COUGH" it was hard to write, it should be hard to read...*//*
                         Tea.teaType.values()[cursor.getInt(cursor.getColumnIndex(Tea.KEY_TYPE))],
                         cursor.getInt(cursor.getColumnIndex(Tea.KEY_INFUSIONS))
                 );
@@ -127,8 +130,8 @@ public class DBteaCRUD {
                 Tea tea = new Tea(
                         cursor.getInt(cursor.getColumnIndex(Tea.KEY_ID)),
                         cursor.getString(cursor.getColumnIndex(Tea.KEY_NAME)),
-                        /*get enum ordinal from the DB and turn it back to enum
-                        "COUGH" "COUGH" it was hard to write, it should be hard to read...*/
+                        *//*get enum ordinal from the DB and turn it back to enum
+                        "COUGH" "COUGH" it was hard to write, it should be hard to read...*//*
                         Tea.teaType.values()[cursor.getInt(cursor.getColumnIndex(Tea.KEY_TYPE))],
                         cursor.getInt(cursor.getColumnIndex(Tea.KEY_INFUSIONS))
                 );
@@ -158,8 +161,8 @@ public class DBteaCRUD {
                 Tea tea = new Tea(
                         cursor.getInt(cursor.getColumnIndex(Tea.KEY_ID)),
                         cursor.getString(cursor.getColumnIndex(Tea.KEY_NAME)),
-                        /*get enum ordinal from the DB and turn it back to enum
-                        "COUGH" "COUGH" it was hard to write, it should be hard to read...*/
+                        *//*get enum ordinal from the DB and turn it back to enum
+                        "COUGH" "COUGH" it was hard to write, it should be hard to read...*//*
                         Tea.teaType.values()[cursor.getInt(cursor.getColumnIndex(Tea.KEY_TYPE))],
                         cursor.getInt(cursor.getColumnIndex(Tea.KEY_INFUSIONS))
                 );
@@ -169,5 +172,5 @@ public class DBteaCRUD {
         cursor.close();
         db.close();
         return teaList;
-    }
+    }*/
 }

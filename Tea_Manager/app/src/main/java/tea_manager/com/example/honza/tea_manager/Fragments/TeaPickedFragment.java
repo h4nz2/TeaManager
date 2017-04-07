@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ import tea_manager.com.example.honza.tea_manager.Activities.MainActivity;
 import tea_manager.com.example.honza.tea_manager.Activities.TeaPickedActivity;
 import tea_manager.com.example.honza.tea_manager.Objects.Tea;
 import tea_manager.com.example.honza.tea_manager.R;
+import tea_manager.com.example.honza.tea_manager.Utility.BitmapConvert;
 import tea_manager.com.example.honza.tea_manager.Utility.DBteaCRUD;
 import tea_manager.com.example.honza.tea_manager.Utility.TeaContentProvider;
 
@@ -37,6 +39,7 @@ public class TeaPickedFragment extends Fragment{
     private TextView teaNameView;
     private TextView teaTypeView;
     private TextView teaInfusionsView;
+    private ImageView teaImageView;
 
     public TeaPickedFragment() {
     }
@@ -58,6 +61,7 @@ public class TeaPickedFragment extends Fragment{
         teaNameView = (TextView) view.findViewById(R.id.teaNameText);
         teaTypeView = (TextView) view.findViewById(R.id.teaTypeText);
         teaInfusionsView = (TextView) view.findViewById(R.id.teaInfusionsText);
+        teaImageView = (ImageView) view.findViewById(R.id.teaImage);
 
         Bundle args = getArguments();
         mTeatype = (Tea.teaType) args.getSerializable(ChooseTeaFragment.TEA_TYPE_CHOSEN);
@@ -80,7 +84,8 @@ public class TeaPickedFragment extends Fragment{
                         cursor.getInt(cursor.getColumnIndex(Tea.KEY_ID)),
                         cursor.getString(cursor.getColumnIndex(Tea.KEY_NAME)),
                         Tea.teaType.values()[cursor.getInt(cursor.getColumnIndex(Tea.KEY_TYPE))],
-                        cursor.getInt(cursor.getColumnIndex(Tea.KEY_INFUSIONS))
+                        cursor.getInt(cursor.getColumnIndex(Tea.KEY_INFUSIONS)),
+                        cursor.getBlob(cursor.getColumnIndex(Tea.KEY_IMAGE))
                 );
                 mTeaList.add(tea);
             } while (cursor.moveToNext());
@@ -133,5 +138,6 @@ public class TeaPickedFragment extends Fragment{
         teaNameView.setText(chosenTea.getName());
         teaTypeView.setText(chosenTea.getType().toString());
         teaInfusionsView.setText("Infusions: " + Integer.toString(chosenTea.getInfusions()));
+        teaImageView.setImageBitmap(chosenTea.getImageBitmap());
     }
 }

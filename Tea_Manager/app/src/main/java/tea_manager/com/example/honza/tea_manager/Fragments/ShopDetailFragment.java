@@ -157,6 +157,7 @@ public class ShopDetailFragment extends Fragment{
                 mFragmentListener.onFragmentFinish();
             }
         });
+        submitButton.requestFocus();
         return view;
     }
 

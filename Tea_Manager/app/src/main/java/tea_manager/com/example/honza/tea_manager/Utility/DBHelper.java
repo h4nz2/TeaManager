@@ -12,7 +12,7 @@ import tea_manager.com.example.honza.tea_manager.Objects.Tea;
  */
 
 public class DBHelper extends SQLiteOpenHelper{
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     // Database Name
     private static final String DATABASE_NAME = "TeaManager.db";
@@ -29,7 +29,8 @@ public class DBHelper extends SQLiteOpenHelper{
                 + Tea.KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
                 + Tea.KEY_NAME + " TEXT, "
                 + Tea.KEY_TYPE + " INTEGER, "
-                + Tea.KEY_INFUSIONS + " INTEGER )";
+                + Tea.KEY_INFUSIONS + " INTEGER, "
+                + Tea.KEY_IMAGE + " BLOB )";
         db.execSQL(CREATE_TABLE_TEAS);
 
         String CREATE_TABLE_SHOPS = "CREATE TABLE " + Shop.TABLE + '('

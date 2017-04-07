@@ -71,6 +71,7 @@
             android:layout_height="wrap_content"
             android:text="@string/submit"
             android:layout_margin="10dp"
-            style="@style/myButton"/>
+            style="@style/myButton"
+            android:focusableInTouchMode="true"/>
 
 </LinearLayout>
