@@ -29,6 +29,8 @@ public class DBshopCRUD {
         values.put(Shop.KEY_OPEN_FROM_MINUTE, shop.getOpeningHours().getFromMinute());
         values.put(Shop.KEY_OPEN_TO_HOUR, shop.getOpeningHours().getToHour());
         values.put(Shop.KEY_OPEN_TO_MINUTE, shop.getOpeningHours().getToMinute());
+        values.put(Shop.KEY_LATITUDE, shop.getLatitude());
+        values.put(Shop.KEY_LONGITUDE, shop.getLongitude());
 
         db.insert(Shop.TABLE, null, values);
         db.close();
@@ -43,7 +45,9 @@ public class DBshopCRUD {
                 Shop.KEY_OPEN_FROM_HOUR + ',' +
                 Shop.KEY_OPEN_FROM_MINUTE + ',' +
                 Shop.KEY_OPEN_TO_HOUR + ',' +
-                Shop.KEY_OPEN_TO_MINUTE +
+                Shop.KEY_OPEN_TO_MINUTE + ',' +
+                Shop.KEY_LATITUDE + ',' +
+                Shop.KEY_LONGITUDE +
                 " FROM " + Shop.TABLE;
         List<Shop> shopList = new ArrayList<Shop>();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -57,7 +61,9 @@ public class DBshopCRUD {
                                 cursor.getInt(cursor.getColumnIndex(Shop.KEY_OPEN_FROM_MINUTE)),
                                 cursor.getInt(cursor.getColumnIndex(Shop.KEY_OPEN_TO_HOUR)),
                                 cursor.getInt(cursor.getColumnIndex(Shop.KEY_OPEN_TO_MINUTE))
-                        )
+                        ),
+                        cursor.getDouble(cursor.getColumnIndex(Shop.KEY_LATITUDE)),
+                        cursor.getDouble(cursor.getColumnIndex(Shop.KEY_LONGITUDE))
                 );
                 shopList.add(shop);
             } while (cursor.moveToNext());
@@ -75,6 +81,8 @@ public class DBshopCRUD {
         values.put(Shop.KEY_OPEN_FROM_MINUTE, shop.getOpeningHours().getFromMinute());
         values.put(Shop.KEY_OPEN_TO_HOUR, shop.getOpeningHours().getToHour());
         values.put(Shop.KEY_OPEN_TO_MINUTE, shop.getOpeningHours().getToMinute());
+        values.put(Shop.KEY_LATITUDE, shop.getLatitude());
+        values.put(Shop.KEY_LONGITUDE, shop.getLongitude());
         db.update(Shop.TABLE, values, Shop.KEY_ID + "= ?", new String[]{String.valueOf(shop.getID())});
         db.close();
     }

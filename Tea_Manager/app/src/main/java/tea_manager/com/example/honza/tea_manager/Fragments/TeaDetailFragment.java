@@ -14,9 +14,12 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -100,23 +103,61 @@ public class TeaDetailFragment extends Fragment {
         typeSpinner.setAdapter(new ArrayAdapter<Tea.teaType>(
                 this.getContext(), R.layout.my_spinner_item, Tea.teaType.values()));
         infusionsPicker = (NumberPicker) view.findViewById(R.id.teaInfusionsSpinner);
+
         //set min and max value of number picker
         infusionsPicker.setMinValue(MIN_INFUSIONS);
         infusionsPicker.setMaxValue(MAX_INFUSIONS);
+        //add an icon to the ImageView
         teaImage.setImageResource(R.drawable.ic_tea_default_black_24dp);
 
         //get the mode and set text and other stuff accordingly
         Bundle args = getArguments();
         mMode = args.getInt(TeaDetailActivity.MODE);
+        mTea = (Tea) args.getSerializable(TeaDetailActivity.TEA_TO_VIEW);
+        fillTeaInfo(mTea);
         if(mMode == TeaDetailActivity.EDIT_MODE){
             submitButton.setText(R.string.saveChanges);
-            mTea = (Tea) args.getSerializable(TeaDetailActivity.TEA_TO_VIEW);
-            fillTeaInfo(mTea);
         }
         else {
             submitButton.setText(R.string.submit);
-            mTea = new Tea();
         }
+
+        //set onChangeListener, so that values are kept when the user takes a photo or rotates the screen
+        nameEdit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                mTea.setName(nameEdit.getText().toString());
+            }
+        });
+
+        typeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mTea.setType(Tea.teaType.valueOf(typeSpinner.getSelectedItem().toString()));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        infusionsPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                mTea.setInfusions(newVal);
+            }
+        });
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,10 +172,10 @@ public class TeaDetailFragment extends Fragment {
                 values.put(Tea.KEY_NAME, mTea.getName());
                 values.put(Tea.KEY_TYPE, mTea.getType().ordinal());
                 values.put(Tea.KEY_INFUSIONS, mTea.getInfusions());
-                //if(mTea.getImageByte() != null)
+                if(mTea.getImageByte() != null)
                     values.put(Tea.KEY_IMAGE, mTea.getImageByte());
-                /*else
-                    values.put(Tea.KEY_IMAGE, (byte[]) null);*/
+                else
+                    values.put(Tea.KEY_IMAGE, (byte[]) null);
 
                 if(mMode == TeaDetailActivity.ADD_MODE) {
                     getContext().getContentResolver().insert(
@@ -168,7 +209,6 @@ public class TeaDetailFragment extends Fragment {
             }
         });
 
-        submitButton.requestFocus();
         return view;
     }
 
@@ -176,29 +216,24 @@ public class TeaDetailFragment extends Fragment {
         nameEdit.setText(tea.getName());
         infusionsPicker.setValue(tea.getInfusions());
         typeSpinner.setSelection(tea.getType().ordinal());
-        if(tea.getImageByte() != null)
+        if(tea.getImageByte() != null) {
             teaImage.setImageBitmap(tea.getImageBitmap());
+        }
     }
 
     public interface FragmentListener{
        void onFragmentFinish();
     }
 
+    /**
+     * This start a camera intent that just takes a picture and returns.
+     * OnActivityResult is handled in the activity housing this fragment,
+     * to prevent issues when user rotates the screen while taking the picture
+     */
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getContext().getPackageManager()) != null) {
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-        }
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            teaImage.clearAnimation();
-            teaImage.setImageBitmap(imageBitmap);
-            mTea.setImage(imageBitmap);
         }
     }
 

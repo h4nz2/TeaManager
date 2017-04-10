@@ -1,6 +1,8 @@
 package tea_manager.com.example.honza.tea_manager.Objects;
 
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.io.Serializable;
 
 /**
@@ -17,6 +19,9 @@ public class Shop implements Serializable {
     public static final String KEY_OPEN_FROM_MINUTE = "openFromMinute";
     public static final String KEY_OPEN_TO_HOUR = "openToHour";
     public static final String KEY_OPEN_TO_MINUTE = "openToMinute";
+    public static final String KEY_LATITUDE = "latitude";
+    public static final String KEY_LONGITUDE = "longitude";
+
 
     public int getID() {
         return ID;
@@ -29,24 +34,27 @@ public class Shop implements Serializable {
     private int ID;
     private String name;
     private OpeningHours openingHours;
+    private double latitude;
+    private double longitude;
+
+
 
     public Shop(){
         /*sets time to 0, timePicker will crash without this,
         because of NullPointerEception when getting opening time */
         openingHours = new OpeningHours();
     };
-    public Shop(int ID, String name, OpeningHours openingHours){
+    public Shop(int ID, String name, OpeningHours openingHours, double latitude, double longitude){
         this.ID = ID;
         this.name = name;
         this.openingHours = openingHours;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
-
-
-
-
 
     /**
      * This class stores opening and closing time; hours and minutes.
+     * It also contains methods for transforming opening hours to string.
      */
     public static class OpeningHours implements Serializable{
         private int fromHour;
@@ -132,6 +140,22 @@ public class Shop implements Serializable {
         public void setToMinute(int toMinute) {
             this.toMinute = toMinute;
         }
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 
     public String getName() {

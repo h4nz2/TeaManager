@@ -12,7 +12,7 @@ import tea_manager.com.example.honza.tea_manager.Objects.Tea;
  */
 
 public class DBHelper extends SQLiteOpenHelper{
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 5;
 
     // Database Name
     private static final String DATABASE_NAME = "TeaManager.db";
@@ -39,7 +39,9 @@ public class DBHelper extends SQLiteOpenHelper{
                 + Shop.KEY_OPEN_FROM_HOUR + " INTEGER, "
                 + Shop.KEY_OPEN_FROM_MINUTE + " INTEGER, "
                 + Shop.KEY_OPEN_TO_HOUR + " INTEGER, "
-                + Shop.KEY_OPEN_TO_MINUTE + " INTEGER )";
+                + Shop.KEY_OPEN_TO_MINUTE + " INTEGER, "
+                + Shop.KEY_LATITUDE + " REAL, "
+                + Shop.KEY_LONGITUDE + " REAL )";
         db.execSQL(CREATE_TABLE_SHOPS);
     }
 
