@@ -42,50 +42,54 @@
             style="@style/myButton"/>
     </LinearLayout>
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:theme="@style/myHeading.white"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="8dp"
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        android:padding="30dp">
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/teaNameText"
+        <LinearLayout
+            android:id="@+id/teaLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="-name-"
-            android:layout_margin="10dp"
-            />
+            android:background="@color/colorPrimaryDark"
+            android:orientation="vertical"
+            android:theme="@style/myHeading.white"
+            android:layout_gravity="center">
 
-        <TextView
-            android:id="@+id/teaTypeText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="-type-"
-            android:layout_margin="10dp"
-            />
+            <TextView
+                android:id="@+id/teaNameText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="-name-" />
 
-        <TextView
-            android:id="@+id/teaInfusionsText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="-infusions-"
-            android:layout_margin="10dp"
-            />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/teaImage"
-            android:layout_margin="10dp"
-            android:src="@drawable/ic_tea_default_black_24dp"/>
-    </LinearLayout>
+            <TextView
+                android:id="@+id/teaTypeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="-type-" />
+
+            <TextView
+                android:id="@+id/teaInfusionsText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="-infusions-" />
+
+            <ImageView
+                android:id="@+id/teaImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_tea_default_black_24dp" />
+        </LinearLayout>
+    </ScrollView>
 </android.support.constraint.ConstraintLayout>

@@ -2,13 +2,10 @@ package tea_manager.com.example.honza.tea_manager.Fragments;
 
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -30,8 +27,6 @@ import android.widget.Spinner;
 import tea_manager.com.example.honza.tea_manager.Activities.TeaDetailActivity;
 import tea_manager.com.example.honza.tea_manager.Objects.Tea;
 import tea_manager.com.example.honza.tea_manager.R;
-import tea_manager.com.example.honza.tea_manager.Utility.BitmapConvert;
-import tea_manager.com.example.honza.tea_manager.Utility.DBteaCRUD;
 import tea_manager.com.example.honza.tea_manager.Utility.TeaContentProvider;
 
 

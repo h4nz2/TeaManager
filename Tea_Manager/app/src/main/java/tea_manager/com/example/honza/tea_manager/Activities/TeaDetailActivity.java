@@ -27,7 +27,7 @@ public class TeaDetailActivity extends AppCompatActivity implements TeaDetailFra
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tea_detail);
 
-        mTea = new Tea(-1, "New Tea", Tea.teaType.Black, 1, null);
+        mTea = new Tea(-1, "", Tea.teaType.Black, 1, null);
         mMode = getIntent().getIntExtra(MODE, -1);
         //startFragment();
     }

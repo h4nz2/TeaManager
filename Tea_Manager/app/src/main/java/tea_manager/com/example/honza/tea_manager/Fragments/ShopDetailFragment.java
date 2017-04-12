@@ -2,11 +2,13 @@ package tea_manager.com.example.honza.tea_manager.Fragments;
 
 
 import android.Manifest;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -22,6 +24,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -45,6 +48,9 @@ import static android.content.Context.LOCATION_SERVICE;
  * A simple {@link Fragment} subclass.
  */
 public class ShopDetailFragment extends Fragment{
+    private final int moveCamera = 0;
+    private final int addMarker = 1;
+
     private EditText nameEdit;
     private TextView openFromText;
     private TextView openToText;
@@ -53,12 +59,14 @@ public class ShopDetailFragment extends Fragment{
     private Button submitButton;
     private Button myLocationButton;
     private Button clearLocationButton;
+    private ProgressBar progressBar;
 
     private GoogleMap mMap;
     private int mMode;
     private FragmentListener mFragmentListener;
     private Shop mShop;
     private SupportMapFragment mSupportMapFragment;
+    private int onLocationUpdated;
 
 
     public ShopDetailFragment() {
@@ -108,6 +116,7 @@ public class ShopDetailFragment extends Fragment{
         openToColumn = (LinearLayout) view.findViewById(R.id.shopOpenToColumn);
         myLocationButton = (Button) view.findViewById(R.id.currentLocationButton);
         clearLocationButton = (Button) view.findViewById(R.id.clearMarkerButton);
+        progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
 
         //get the mode and set text and other stuff accordingly
         Bundle args = getArguments();
@@ -227,15 +236,15 @@ public class ShopDetailFragment extends Fragment{
                             LatLng shopLocation = new LatLng(mShop.getLatitude(), mShop.getLongitude());
                             mMap.addMarker(new MarkerOptions()
                                     .position(shopLocation)
-                                    .title(mShop.getName()));
+                                    .title(mShop.getName()))
+                                    .setDraggable(true);
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(shopLocation, 13));
                         }
                         //if the shop does not have a location, go to user's current location if possible
                         else if(permissionGranted()){
-                            Location myLocation = getCurrentLocation();
-                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                                    new LatLng(myLocation.getLatitude(), myLocation.getLongitude()), 14));
-                        }
+                            onLocationUpdated = moveCamera;
+                            getCurrentLocation();
+                            }
                         //long clicking will add a marker and save the location
                         mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
                             @Override
@@ -279,16 +288,8 @@ public class ShopDetailFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 if(permissionGranted()) {
-                    Location location = getCurrentLocation();
-                    LatLng currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
-                    mMap.clear();
-                    mShop.setLatitude(currentLocation.latitude);
-                    mShop.setLongitude(currentLocation.longitude);
-                    mMap.addMarker(new MarkerOptions()
-                            .position(currentLocation)
-                            .title(mShop.getName())
-                            .draggable(true));
-                    mMap.moveCamera(CameraUpdateFactory.newLatLng(currentLocation));
+                    onLocationUpdated = addMarker;
+                    getCurrentLocation();
                 }
                 else
                     Snackbar.make(v, "You have denied location tracking", 3000).show();
@@ -299,6 +300,8 @@ public class ShopDetailFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 mMap.clear();
+                mShop.setLongitude(0);
+                mShop.setLatitude(0);
             }
         });
 
@@ -338,6 +341,8 @@ public class ShopDetailFragment extends Fragment{
         if(permissions[0].equals(Manifest.permission.ACCESS_FINE_LOCATION) && grantResults[0] == PackageManager.PERMISSION_GRANTED){
             //noinspection MissingPermission
             mMap.setMyLocationEnabled(true);
+            onLocationUpdated = moveCamera;
+            getCurrentLocation();
         }
     }
 
@@ -357,8 +362,44 @@ public class ShopDetailFragment extends Fragment{
         // Get the name of the best provider
         String provider = locationManager.getBestProvider(criteria, true);
 
+        progressBar.setVisibility(View.VISIBLE);
+        locationManager.requestSingleUpdate(criteria, new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                if(onLocationUpdated == addMarker) {
+                    mShop.setLatitude(location.getLatitude());
+                    mShop.setLongitude(location.getLongitude());
+                    mMap.clear();
+                    mMap.addMarker(new MarkerOptions()
+                            .title(mShop.getName())
+                            .draggable(true)
+                            .position(latLng));
+                }
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 13));
+                progressBar.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
+
+            }
+        }, null);
+
+        Snackbar.make(getView(), "Updating location...", Snackbar.LENGTH_SHORT).show();
         // Get Current Location
         Location myLocation = locationManager.getLastKnownLocation(provider);
+
         return myLocation;
     }
 }

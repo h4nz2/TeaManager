@@ -4,17 +4,22 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -62,6 +67,19 @@ public class TeaPickedFragment extends Fragment{
         teaTypeView = (TextView) view.findViewById(R.id.teaTypeText);
         teaInfusionsView = (TextView) view.findViewById(R.id.teaInfusionsText);
         teaImageView = (ImageView) view.findViewById(R.id.teaImage);
+
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+            LinearLayout layout = (LinearLayout) view.findViewById(R.id.teaLayout);
+            FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) layout.getLayoutParams();
+            params.gravity = Gravity.CENTER_HORIZONTAL;
+            layout.setLayoutParams(params);
+        }
+        else{
+            LinearLayout layout = (LinearLayout) view.findViewById(R.id.teaLayout);
+            FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) layout.getLayoutParams();
+            params.gravity = Gravity.CENTER;
+            layout.setLayoutParams(params);
+        }
 
         Bundle args = getArguments();
         mTeatype = (Tea.teaType) args.getSerializable(ChooseTeaFragment.TEA_TYPE_CHOSEN);

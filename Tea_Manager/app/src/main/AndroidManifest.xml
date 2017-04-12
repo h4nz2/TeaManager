@@ -66,8 +66,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="tea_manager.com.example.honza.tea_manager.Activities.MainActivity" />
         </activity>
-        <activity android:name=".Activities.TeaDetailActivity" />
-        <activity android:name=".Activities.ShopDetailActivity" />
+        <activity android:name=".Activities.TeaDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.ShopDetailActivity"
+            android:screenOrientation="portrait"/>
 
         <provider
             android:name=".Utility.TeaContentProvider"
